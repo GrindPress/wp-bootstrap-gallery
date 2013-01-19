@@ -102,7 +102,7 @@ function wp_bootstrap_gallery( $content, $attr ) {
 	
 	$selector	=	"gallery-{$instance}";
 	$size_class	=	sanitize_html_class( $size );
-	$output		=	"<ul id='$selector' class='thumbnails'>";
+	$output		=	"<div class='row' id='$selector'>";
 
 	/**
  	 * Count number of items in $attachments array, and assign a colum layout to $span_array
@@ -125,7 +125,7 @@ function wp_bootstrap_gallery( $content, $attr ) {
 	        break;
 	    case 4:
 	    	/* One full width image with three 1/3 width images underneath */
-	    	$span_array = array(12,4,4,4);
+	    	$span_array = array(4,4,4,4);
 	        break;
 	    case 5:
 	    	/* Two half width images with fout 1/4 width images underneath */
@@ -150,9 +150,9 @@ function wp_bootstrap_gallery( $content, $attr ) {
 		$attachment_image = wp_get_attachment_image( $id, 'full');
 		$attachment_link = wp_get_attachment_link( $id, 'full', ! ( isset( $attr['link'] ) AND 'file' == $attr['link'] ) );
 		
-		$output .= "<li class='span" . $span_array[$attachment_count] . "'>";
+		$output .= "<div class='span" . $span_array[$attachment_count] . "'>";
 		$output .= $attachment_link . "\n";
-		$output .= "</li>\n";
+		$output .= "</div>\n";
 
 		if(count($attachments) >= 7 && $attachment_count == 3){
 			$attachment_count = 3;
@@ -161,7 +161,7 @@ function wp_bootstrap_gallery( $content, $attr ) {
 		}
 	}
 	
-	$output .= "</ul>\n";
+	$output .= "</div>\n";
 	
 	return $output;
 }
